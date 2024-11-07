@@ -1,15 +1,21 @@
-import { OrbitControls } from '@react-three/drei'
-import { Perf } from 'r3f-perf'
+import { OrbitControls, Stars } from '@react-three/drei'
 import FresnelNoiseMaterial from './FresnelNoiseMaterial'
-import { useControls } from 'leva'
+import { Leva, useControls } from 'leva'
 
 export default function Experience()
 {
-    const { power } = useControls({
+    const { power, intensity } = useControls({
         power:
         {
             value: -1.5,
-            min: -5,
+            min: -10,
+            max: 10,
+            step: 0.01
+        },
+        intensity:
+        {
+            value: 1.5,
+            min: 1,
             max: 5,
             step: 0.01
         }
@@ -18,16 +24,18 @@ export default function Experience()
     console.log( power )
     return <>
 
-        <Perf position="top-left" />
+        <Leva hidden />
 
         <OrbitControls makeDefault />
 
         <mesh>
-            <icosahedronGeometry args={[ 3, 10 ]}/>
+            <sphereGeometry args={[ 2.4, 65, 65 ]}/>
             <FresnelNoiseMaterial
                 fresnelPower={ power }
+                intensity={ intensity }
             />
         </mesh>
+        <Stars radius={100} depth={50} count={1000} factor={4} saturation={0} fade speed={2} />
 
     </>
 }

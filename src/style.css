@@ -7,5 +7,5 @@ body,
     left: 0;
     width: 100%;
     height: 100%;
-    background: ivory;
+    background-image: linear-gradient(to bottom, #05142a, #031537, #0b1342, #1d0e4a, #30014f);
 }

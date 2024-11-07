@@ -1,4 +1,4 @@
-vec2 random(vec2 uv) 
+vec2 randomVoronoi(vec2 uv) 
 {
 	return vec2(fract(sin(dot(uv.xy,
 		vec2(12.9898,78.233))) * 43758.5453123));
@@ -15,7 +15,7 @@ float noiseVoronoi(vec2 uv, float columns, float rows)
 	for (int y= -1; y <= 1; y++) {
 		for (int x= -1; x <= 1; x++) {
 			vec2 neighbor = vec2(float(x),float(y));
-			vec2 point = random(index_uv + neighbor);
+			vec2 point = randomVoronoi(index_uv + neighbor);
 			
 			vec2 diff = neighbor + point - fract_uv;
 			float dist = length(diff);

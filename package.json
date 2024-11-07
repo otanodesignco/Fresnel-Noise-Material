@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "deploy": "vercel --prod"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "4.3",
@@ -16,10 +17,13 @@
   "dependencies": {
     "@react-three/drei": "^9.108.1",
     "@react-three/fiber": "^8.16.8",
+    "@react-three/postprocessing": "^2.16.3",
     "leva": "^0.9.35",
+    "postprocessing": "^6.36.4",
     "r3f-perf": "^7.2.1",
     "react": "18.3",
     "react-dom": "18.3",
-    "three": "^0.166.1"
+    "three": "^0.166.1",
+    "vercel": "^37.14.0"
   }
 }
