@@ -16,6 +16,7 @@ in vec2 worldUV;
 #include ./util/twirl.glsl
 #include ./util/radialShear.glsl
 #include ./util/rotate2D.glsl
+#include ./lighting/lightingDiffuse.glsl
 
 void main()
 {
@@ -28,6 +29,11 @@ void main()
 
     float rotateOffset = uTime * 0.01;
     float rotateOffset2 = uTime * 0.01;
+
+    float lightingDiff = lightingDiffuse( normals, viewDirection );
+    lightingDiff =  1.0 - smoothstep( 0.01, 1.0, lightingDiff );
+    vec4 lightingDiffuze = vec4( vec3( 0.003, 0.003, 0.003 ), 0.4 );
+    lightingDiffuze.rgb *= lightingDiff;
 
     // rotate uv and generate noise
 
@@ -52,6 +58,7 @@ void main()
     blendTexturesOffset = smoothstep( - 0.5, 1.0, blendTexturesOffset );
 
     vec4 colorBase = mix( textureDay, textureNite, blendTexturesOffset );
+    colorBase = mix( colorBase, lightingDiffuze, lightingDiff );
 
     rimLightDirection = smoothstep( - 0.5, 1.0, rimLightDirection );
 
@@ -67,7 +74,7 @@ void main()
 
     
     gl_FragColor = colorFinal;
-    //gl_FragColor = colorRimLight;
+    //gl_FragColor = colorBase;
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
 
